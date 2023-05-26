@@ -1,6 +1,5 @@
 import moment from 'moment';
 
-
 const Footer = () => {
     let currentYear = moment().format('YYYY');
     console.log(currentYear);
