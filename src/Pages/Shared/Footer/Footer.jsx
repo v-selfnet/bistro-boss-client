@@ -4,8 +4,9 @@ import moment from 'moment';
 const Footer = () => {
     let currentYear = moment().format('YYYY');
     console.log(currentYear);
+
     return (
-        <footer>
+        <footer className='mt-10'>
             <div className="footer bg-neutral text-neutral-content">
                 <div className="items-center p-10 bg-neutral-500 justify-end text-center w-full h-full">
                     <p className="text-xl w-full text-right">
