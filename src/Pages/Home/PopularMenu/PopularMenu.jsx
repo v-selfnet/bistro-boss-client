@@ -4,14 +4,14 @@ import MenuItem from "../../Shared/MenuItem/MenuItem";
 
 const PopularMenu = () => {
     const [menu, setMenu] = useState([]);
-    useEffect( () => {
+    useEffect(() => {
         fetch('menu.json')
-        .then(res => res.json())
-        .then(data => {
-            const poplulatItems = data.filter(item => item.category === 'popular')
-            setMenu(poplulatItems)
-        })
-        
+            .then(res => res.json())
+            .then(data => {
+                const poplulatItems = data.filter(item => item.category === 'popular')
+                setMenu(poplulatItems)
+            })
+
     }, []);
 
     return (
@@ -28,7 +28,10 @@ const PopularMenu = () => {
                     ></MenuItem>)
                 }
             </div>
-            
+            <div className="flex flex-col items-center mt-10">
+                <button className="btn btn-outline border-0 border-b-4">View Full Menu</button>
+            </div>
+
         </section>
     );
 };
