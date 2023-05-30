@@ -5,11 +5,17 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useState } from "react";
 import useMenu from "../../../Hooks/useMenu";
-import FoodCard from "./FoodCard";
+import OrderTab from "./OrderTab";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+    const categories = ['salad', 'pizza', 'dessert', 'soup', 'drink']
+    const {category} = useParams();
+    const initIndex = categories.indexOf(category);
+
+    const [tabIndex, setTabIndex] = useState(initIndex);
     const [menu] = useMenu();
+    
     const salad = menu.filter(item => item.category === 'salad')
     const pizza = menu.filter(item => item.category === 'pizza')
     const dessert = menu.filter(item => item.category === 'dessert')
@@ -36,54 +42,19 @@ const Order = () => {
                         <Tab>Drink</Tab>
                     </TabList>
                     <TabPanel >
-                        <div className="grid grid-cols-3 gap-6">
-                            {
-                                salad.map(item => <FoodCard
-                                    key={item._id}
-                                    item={item}
-                                ></FoodCard>)
-                            }
-                        </div>
+                        <OrderTab items={salad}></OrderTab>
                     </TabPanel>
                     <TabPanel>
-                        <div className="grid grid-cols-3 gap-6">
-                            {
-                                pizza.map(item => <FoodCard
-                                    key={item._id}
-                                    item={item}
-                                ></FoodCard>)
-                            }
-                        </div>
+                        <OrderTab items={pizza}></OrderTab>
                     </TabPanel>
                     <TabPanel>
-                        <div className="grid grid-cols-3 gap-6">
-                            {
-                                dessert.map(item => <FoodCard
-                                    key={item._id}
-                                    item={item}
-                                ></FoodCard>)
-                            }
-                        </div>
+                        <OrderTab items={dessert}></OrderTab>
                     </TabPanel>
                     <TabPanel>
-                        <div className="grid grid-cols-3 gap-6">
-                            {
-                                soup.map(item => <FoodCard
-                                    key={item._id}
-                                    item={item}
-                                ></FoodCard>)
-                            }
-                        </div>
+                        <OrderTab items={soup}></OrderTab>
                     </TabPanel>
                     <TabPanel>
-                    <div className="grid grid-cols-3 gap-6">
-                            {
-                                drinks.map(item => <FoodCard
-                                    key={item._id}
-                                    item={item}
-                                ></FoodCard>)
-                            }
-                        </div>
+                        <OrderTab items={drinks}></OrderTab>
                     </TabPanel>
                 </Tabs>
             </div>

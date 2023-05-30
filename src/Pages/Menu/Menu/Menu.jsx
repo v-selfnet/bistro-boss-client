@@ -35,9 +35,6 @@ const Menu = () => {
                     subHeading={"Do not miss"}
                 ></SectionTitle>
                 <MenuCategory items={offer}></MenuCategory>
-                <div className="flex flex-col items-center my-10">
-                    <button className="btn btn-outline border-0 border-b-4">Order Your Favourite Food</button>
-                </div>
             </div>
 
             {/* desert */}
@@ -47,10 +44,7 @@ const Menu = () => {
                 detail="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem odio deserunt soluta voluptatibus cupiditate vitae asperiores rerum dolorem corporis iusto!"
             ></Cover>
             <div className='max-w-5xl mx-auto my-10'>
-                <MenuCategory items={dessert}></MenuCategory>
-                <div className="flex flex-col items-center mt-10">
-                    <button className="btn btn-outline border-0 border-b-4">Order Your Favourite Food</button>
-                </div>
+                <MenuCategory items={dessert} title="dessert"></MenuCategory>
             </div>
 
             {/* pizza */}
@@ -60,10 +54,7 @@ const Menu = () => {
                 detail="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem odio deserunt soluta voluptatibus cupiditate vitae asperiores rerum dolorem corporis iusto!"
             ></Cover>
             <div className='max-w-5xl mx-auto my-10'>
-                <MenuCategory items={pizza}></MenuCategory>
-                <div className="flex flex-col items-center mt-10">
-                    <button className="btn btn-outline border-0 border-b-4">Order Your Favourite Food</button>
-                </div>
+                <MenuCategory items={pizza} title="pizza"></MenuCategory>
             </div>
 
             {/* salad */}
@@ -73,10 +64,7 @@ const Menu = () => {
                 detail="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem odio deserunt soluta voluptatibus cupiditate vitae asperiores rerum dolorem corporis iusto!"
             ></Cover>
             <div className='max-w-5xl mx-auto my-10'>
-                <MenuCategory items={salad}></MenuCategory>
-                <div className="flex flex-col items-center mt-10">
-                    <button className="btn btn-outline border-0 border-b-4">Order Your Favourite Food</button>
-                </div>
+                <MenuCategory items={salad} title="salad"></MenuCategory>
             </div>
 
             {/* soup */}
@@ -86,10 +74,7 @@ const Menu = () => {
                 detail="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem odio deserunt soluta voluptatibus cupiditate vitae asperiores rerum dolorem corporis iusto!"
             ></Cover>
             <div className='max-w-5xl mx-auto my-10'>
-                <MenuCategory items={soup}></MenuCategory>
-                <div className="flex flex-col items-center mt-10">
-                    <button className="btn btn-outline border-0 border-b-4">Order Your Favourite Food</button>
-                </div>
+                <MenuCategory items={soup} title="soup"></MenuCategory>
             </div>
         </div>
     );
