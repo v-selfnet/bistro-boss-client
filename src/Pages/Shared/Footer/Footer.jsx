@@ -2,13 +2,13 @@ import moment from 'moment';
 
 const Footer = () => {
     let currentYear = moment().format('YYYY');
-    console.log(currentYear);
+    // console.log(currentYear);
 
     return (
         <footer className='mt-10'>
             <div className="footer bg-neutral text-neutral-content">
                 <div className="items-center p-10 bg-neutral-500 justify-end text-center w-full h-full">
-                    <p className="text-xl w-full text-right">
+                    <div className="text-xl w-full text-right">
                         Bistro Boss Restaurant
                         <div className="divider w-52"></div>
                         <small>Via Giuseppe Chiovenda 96
@@ -16,7 +16,7 @@ const Footer = () => {
                             <br />info@bistroboss.com
                             <br />www.bistroboss.com
                         </small>
-                    </p>
+                    </div>
                 </div>
                 <div className="items-center text-left p-10 bg-neutral w-full">
                     <span className="footer-title">Social</span>
