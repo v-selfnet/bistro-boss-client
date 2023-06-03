@@ -1,23 +1,42 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
-    
+
     // form created by reacy-hook-form
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    
-    const {createUser} = useContext(AuthContext)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const { createUser, updateUserProfile } = useContext(AuthContext)
+
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         createUser(data.email, data.password)
-        .then(result => {
-            const newUser = result.user;
-            console.log(newUser);
-        })
-        .catch(error => console.error(error));
+            .then(result => {
+                const newUser = result.user;
+                console.log('New User Create Successfully ', newUser);
+
+                // update user profile
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        console.log('Update Success')
+                        reset();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Succefully updated user profile',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                          navigate('/');
+                    })
+                    .catch(error => console.error(error))
+            })
+            .catch(error => console.error(error));
     };
 
     return (
@@ -72,7 +91,13 @@ const Register = () => {
                                     <label className="label">
                                         <span className="label-text">Photo</span>
                                     </label>
-                                    <input type="text" {...register("photo")} name="photo" placeholder="Photo link imgBB" className="input input-bordered" required />
+                                    <input type="text" {...register("photo", {
+                                        required: true
+                                    })} name="photo" placeholder="Photo link imgBB" className="input input-bordered" />
+                                    {/* Photo error handel */}
+                                    {
+                                        errors.photo?.type === 'required' && <p className='text-red-600'>Password is required</p>
+                                    }
                                 </div>
                                 <div className="form-control mt-6">
                                     <input type="submit" value="Register" className="btn btn-primary" />

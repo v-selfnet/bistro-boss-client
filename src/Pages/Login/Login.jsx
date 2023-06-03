@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
@@ -8,6 +8,11 @@ import { Helmet } from "react-helmet-async";
 const Login = () => {
     const [disable, setDisable] = useState(true);
     const { signIn } = useContext(AuthContext);
+
+    //private route
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignin = event => {
         event.preventDefault();
@@ -21,6 +26,8 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                // private route
+                navigate(from, {replace:true})
             })
             .catch(error => console.error(error))
     }
