@@ -85,13 +85,14 @@ const Login = () => {
                                     <label className="label">
                                         <LoadCanvasTemplate></LoadCanvasTemplate>
                                     </label>
-                                    <input onBlur={handleCaptcha} type="text" ref={captchaRef} name="captcha" placeholder="captcha" className="input input-bordered" required />
+                                    <input onBlur={handleCaptcha} type="text" ref={captchaRef} name="captcha" placeholder="captcha" className="input input-bordered" disabled/>
                                 </div>
                                 {/* Captcha */}
 
 
                                 <div className="form-control mt-6">
-                                    <input type="submit" disabled={disable} value="Login" className="btn btn-primary" />
+                                    {/* TODO:  disabled={disable} for captcha active*/} 
+                                    <input type="submit" disabled={false} value="Login" className="btn btn-primary" />
                                 </div>
                             </form>
                             {/* <SocialLogin></SocialLogin> */}
