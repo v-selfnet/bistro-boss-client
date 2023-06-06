@@ -50,7 +50,6 @@ const Login = () => {
         }
     }
 
-
     return (
         <>
             <Helmet><title>Bistro Boss | Login</title></Helmet>
