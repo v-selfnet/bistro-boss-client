@@ -9,7 +9,7 @@ const FoodCard = ({ item }) => {
     const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
-    const {refetch} = useCart()
+    const [, refetch] = useCart();
 
     const handleAddToCart = addItem => {
         console.log(addItem)
@@ -26,10 +26,11 @@ const FoodCard = ({ item }) => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     if (data.insertedId) {
-                        refetch() // when add a item call refetch() to view order qty in navbar 
+                        refetch(); // when add a item call refetch() to view order qty in navbar 
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'center',
                             icon: 'success',
                             title: 'Successfully added to Cart',
                             showConfirmButton: false,

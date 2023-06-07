@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Register = () => {
 
@@ -23,16 +24,29 @@ const Register = () => {
                 // update user profile
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log('Update Success')
-                        reset();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Succefully updated user profile',
-                            showConfirmButton: false,
-                            timer: 1500
-                          })
-                          navigate('/');
+                        // server: 7 store user info to DB [id, pass]
+                        const saveUser = {name: data.name, email: data.email, pass: data.password}
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type':'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        }) // fetch close )
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Succefully updated user profile',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/');
+                                }
+                            })
                     })
                     .catch(error => console.error(error))
             })
@@ -103,7 +117,7 @@ const Register = () => {
                                     <input type="submit" value="Register" className="btn btn-primary" />
                                 </div>
                             </form>
-                            {/* <SocialLogin></SocialLogin> */}
+                            <SocialLogin></SocialLogin>
                             <p className='text-xs mt-3'>Do not have an Account? <Link to='/login' className='text-orange-600'>Please Login</Link></p>
                         </div>
                     </div>

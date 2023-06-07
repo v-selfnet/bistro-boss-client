@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from "../../../Hooks/useCart";
+import logo from '/logo.png'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    console.log(user)
     const [cart] = useCart();
+    console.log(cart)
 
     const handleLogout = () => {
         logOut()
-            .then(() => console.log('Logout Success'))
+            .then(() => { })
             .catch(error => console.error(error))
     }
 
@@ -22,10 +25,8 @@ const Navbar = () => {
         <li><Link to='/dashboard/userhome'>Dashboard</Link></li>
         <li>
             <Link to='/dashboard/mycart'>
-                {/* <button className="btn"> */}
-                    <FaShoppingCart></FaShoppingCart>
-                    <div className="badge badge-secondary">+ {cart?.length || 0}</div>
-                {/* </button> */}
+                <FaShoppingCart></FaShoppingCart>
+                <div className="badge badge-secondary">+ {cart?.length || 0}</div>
             </Link>
         </li>
 
@@ -36,6 +37,7 @@ const Navbar = () => {
                 </> :
                 <>
                     <li><Link to='/login'>Login</Link></li>
+                    <li><Link to='/register'>Register</Link></li>
                 </>
         }
     </>
@@ -58,8 +60,11 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <div className="navbar-end">
-                {/* <a className="btn">Get started</a> */}
+            <div className="navbar-end gap-5">
+                {user?.displayName ? user.displayName : user?.email}
+                <div className="w-10 rounded-full">
+                    <img src={user?.photoURL ? user.photoURL : logo} />
+                </div>
             </div>
 
         </div>
