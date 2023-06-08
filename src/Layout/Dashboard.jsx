@@ -1,18 +1,26 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaShoppingCart, FaWallet, FaCalendarAlt, FaShoppingBag, FaEnvelope } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaWallet, FaCalendarAlt, FaShoppingBag, FaEnvelope, FaUtensils, FaSlidersH, FaBook, FaUsers, FaSignOutAlt } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import useCart from "../Hooks/useCart";
+import { Helmet } from "react-helmet-async";
 
 
 
 const Dashboard = () => {
     const [cart] = useCart();
 
+    // TODO: manage admin
+    const isAdmin = true;
+
     return (
+
         <div className="drawer drawer-mobile ">
+            <Helmet>
+                <title>Bistro Boss | Dashboard</title>
+            </Helmet>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center ">
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden absolute top-0 left-0">Open drawer</label>
 
                 {/* Page content here */}
                 <Outlet></Outlet>
@@ -30,16 +38,33 @@ const Dashboard = () => {
                         <h1 className="text-xl">BISTRO BOSS</h1>
                         <p className="">R e s t a u r a n t</p>
                     </div>
-                    <li><Link to='userhome'><FaHome />User Home</Link></li>
-                    <li><Link to='calender'><FaCalendarAlt />Reservation</Link></li>
-                    <li><Link to='payment'><FaWallet />Payment History</Link></li>
-                    <li>
-                        <Link to='mycart'><FaShoppingCart />My Cart
-                            <div className="badge badge-secondary">
-                                +{cart?.length || 0}
-                            </div>
-                        </Link>
-                    </li>
+
+
+
+                    {
+                        isAdmin ? <>
+                            <li><Link to='#'><FaHome />Admin Home</Link></li>
+                            <li><Link to='#'><FaUtensils />Add Items</Link></li>
+                            <li><Link to='#'><FaSlidersH />Manage Items</Link></li>
+                            <li><Link to='#'><FaBook />Manage Bookings</Link></li>
+                            <li><Link to='allusers'><FaUsers />All Users</Link></li>
+
+                        </> : <>
+                            <li><Link to='userhome'><FaHome />User Home</Link></li>
+                            <li><Link to='calender'><FaCalendarAlt />Reservation</Link></li>
+                            <li><Link to='payment'><FaWallet />Payment History</Link></li>
+                            <li>
+                                <Link to='mycart'><FaShoppingCart />My Cart
+                                    <div className="badge badge-secondary">
+                                        +{cart?.length || 0}
+                                    </div>
+                                </Link>
+                            </li>
+
+                        </>
+                    }
+
+
 
                     <div className="divider"></div>
 
@@ -47,6 +72,13 @@ const Dashboard = () => {
                     <li><Link to='/menu'><FiMenu />Foods Menu</Link></li>
                     <li><Link to='/order/salad'><FaShoppingBag />Shop</Link></li>
                     <li><Link to='#'><FaEnvelope />Contact</Link></li>
+
+
+
+
+                    <div className="divider"></div>
+                    <li><Link to='/'><FaSignOutAlt />Exit</Link></li>
+
 
                 </ul>
             </div>

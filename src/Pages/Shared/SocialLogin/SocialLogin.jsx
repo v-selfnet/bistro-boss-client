@@ -17,7 +17,7 @@ const SocialLogin = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 // server: 7 store user info to DB [id, pass]
-                const saveUser = { name: loggedUser.displayName, email: loggedUser.email }
+                const saveUser = { name: loggedUser.displayName, email: loggedUser.email, photo:loggedUser.photoURL}
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
@@ -26,7 +26,7 @@ const SocialLogin = () => {
                     body: JSON.stringify(saveUser)
                 }) // fetch close )
                     .then(res => res.json())
-                    .then(data => {
+                    .then((data) => {
                         console.log(data)
                         // navigate to target location after login successfully
                         navigate(from, { replace: true })

@@ -19,17 +19,17 @@ const Register = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const newUser = result.user;
-                console.log('New User Create Successfully ', newUser);
+                console.log('New User Create Successfully', newUser);
 
                 // update user profile
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
                         // server: 7 store user info to DB [id, pass]
-                        const saveUser = {name: data.name, email: data.email, pass: data.password}
+                        const saveUser = { name: data.name, email: data.email, pass: data.password, photo: data.photo }
                         fetch('http://localhost:5000/users', {
                             method: 'POST',
                             headers: {
-                                'content-type':'application/json'
+                                'content-type': 'application/json'
                             },
                             body: JSON.stringify(saveUser)
                         }) // fetch close )
@@ -38,7 +38,7 @@ const Register = () => {
                                 if (data.insertedId) {
                                     reset();
                                     Swal.fire({
-                                        position: 'top-end',
+                                        position: 'center',
                                         icon: 'success',
                                         title: 'Succefully updated user profile',
                                         showConfirmButton: false,
@@ -50,7 +50,16 @@ const Register = () => {
                     })
                     .catch(error => console.error(error))
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'User already exist',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
     };
 
     return (

@@ -12,6 +12,7 @@ import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import Calender from "../Pages/Dashboard/Calender/Calender";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+            // Normal Users Routes
             {
                 path: 'userhome',
                 element: <UserHome></UserHome>
@@ -64,6 +66,12 @@ export const router = createBrowserRouter([
             {
                 path: 'mycart',
                 element: <MyCart></MyCart>
+            },
+
+            // Admin Users Routes
+            {
+                path: 'allusers',
+                element: <AllUsers></AllUsers>
             },
         ]
     }

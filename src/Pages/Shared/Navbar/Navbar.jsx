@@ -23,13 +23,6 @@ const Navbar = () => {
         <li><Link to='/order/salad'>Order</Link></li>
         <li><Link to='/secret'>Secret</Link></li>
         <li><Link to='/dashboard/userhome'>Dashboard</Link></li>
-        <li>
-            <Link to='/dashboard/mycart'>
-                <FaShoppingCart></FaShoppingCart>
-                <div className="badge badge-secondary">+ {cart?.length || 0}</div>
-            </Link>
-        </li>
-
         {
             user ?
                 <>
@@ -40,6 +33,12 @@ const Navbar = () => {
                     <li><Link to='/register'>Register</Link></li>
                 </>
         }
+        <li>
+            <Link to='/dashboard/mycart'>
+                <FaShoppingCart></FaShoppingCart>
+                <div className="badge badge-secondary">+ {cart?.length || 0}</div>
+            </Link>
+        </li>
     </>
     return (
         <div className="navbar fixed z-10 opacity-80 bg-black text-white">
@@ -62,9 +61,11 @@ const Navbar = () => {
 
             <div className="navbar-end gap-5">
                 {user?.displayName ? user.displayName : user?.email}
-                <div className="w-10 rounded-full">
-                    <img src={user?.photoURL ? user.photoURL : logo} />
-                </div>
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                        <img src={user?.photoURL ? user.photoURL : logo} />
+                    </div>
+                </label>
             </div>
 
         </div>
