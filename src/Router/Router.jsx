@@ -13,6 +13,8 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import Calender from "../Pages/Dashboard/Calender/Calender";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -70,9 +72,13 @@ export const router = createBrowserRouter([
 
             // Admin Users Routes
             {
+                path: 'additem',
+                element: <AdminRoute><AddItem></AddItem></AdminRoute>
+            },
+            {
                 path: 'allusers',
                 element: <AllUsers></AllUsers>
-            },
+            }
         ]
     }
 ])

@@ -4,40 +4,44 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import logo from '/profile.png'
 import { FaTrash, FaUserShield } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
+    const [axiosSecure] = useAxiosSecure();
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         // console.log(users)
-        const res = await fetch('http://localhost:5000/users')
-        return res.json();
+        // const res = await fetch('http://localhost:5000/users')
+        // return res.json();
+        const res = await axiosSecure.get('/users')
+        return res.data;
     })
 
-    
+
     const handleMakeAdmin = user => {
         console.log(user)
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH'
         })
-        .then(res => res.json())
-        .then(data => {
-            refetch();
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                refetch();
+                console.log(data)
+            })
     }
 
     const handleDelete = user => {
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(data => {
-            // console.log(data)
-            if(data.deletedCount > 0){
-                refetch();
-                alert('User Delete Seccess !!!')
-            }
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                if (data.deletedCount > 0) {
+                    refetch();
+                    alert('User Delete Seccess !!!')
+                }
 
-        })
+            })
     }
 
     return (
@@ -64,7 +68,7 @@ const AllUsers = () => {
                     <tbody>
                         {
                             users.map((user, index) => <tr key={user._id}>
-                                <th>{index +1}</th>
+                                <th>{index + 1}</th>
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
@@ -75,12 +79,13 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.pass}</td>
-                                <td>{user.role === 'admin' ? 'admin' : 
-                                <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost text-orange-600 text-3xl"><FaUserShield /></button>
+                                <td>{
+                                    user.role === 'admin' ? 'admin' :
+                                        <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost text-orange-600 text-3xl"><FaUserShield /></button>
                                 }
                                 </td>
                                 <td>
-                                <button onClick={() => handleDelete(user)} className="btn btn-ghost text-red-600 text-3xl"><FaTrash /></button>
+                                    <button onClick={() => handleDelete(user)} className="btn btn-ghost text-red-600 text-3xl"><FaTrash /></button>
                                 </td>
                             </tr>)
 

@@ -4,16 +4,25 @@ import { FiMenu } from 'react-icons/fi';
 import useCart from "../Hooks/useCart";
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../Hooks/useAdmin";
+import useAuth from "../Hooks/useAuth";
+import './Dashboard.css'
 
 
 
 const Dashboard = () => {
+    const { logOut } = useAuth();
     const [cart] = useCart();
 
     // TODO: manage admin
     // const isAdmin = true;
 
     const [isAdmin] = useAdmin()
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
 
     return (
 
@@ -35,7 +44,7 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
 
-                <ul className="menu p-4 w-80 text-base-content bg-orange-300">
+                <ul className={`menu p-4 w-80 text-base-content ${isAdmin ? 'admin': 'user'}`}>
                     {/* Sidebar content here */}
                     <div className="text-center mb-10">
                         <h1 className="text-xl">BISTRO BOSS</h1>
@@ -47,7 +56,7 @@ const Dashboard = () => {
                     {
                         isAdmin ? <>
                             <li><Link to='#'><FaHome />Admin Home</Link></li>
-                            <li><Link to='#'><FaUtensils />Add Items</Link></li>
+                            <li><Link to='additem'><FaUtensils />Add Items</Link></li>
                             <li><Link to='#'><FaSlidersH />Manage Items</Link></li>
                             <li><Link to='#'><FaBook />Manage Bookings</Link></li>
                             <li><Link to='allusers'><FaUsers />All Users</Link></li>
@@ -80,7 +89,7 @@ const Dashboard = () => {
 
 
                     <div className="divider"></div>
-                    <li><Link to='/'><FaSignOutAlt />Exit</Link></li>
+                    <li><Link onClick={handleLogout} to='/'><FaSignOutAlt />Exit</Link></li>
 
 
                 </ul>
