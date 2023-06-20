@@ -20,15 +20,34 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        // console.log(email, password);
 
         // signin
         signIn(email, password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                const saveUser = { 
+                    name: loggedUser?.displayName ? loggedUser.displayName: 'N/A', 
+                    email: loggedUser.email, 
+                    photo: loggedUser?.photoURL ? loggedUser.photoURL: 'N/A', 
+                    pass: password 
+                }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                .then(res => res.json)
+                .then(data => {
+                    if(data.insertedId > 0){
+                        alert('Login Success')
+                    }
+                })
                 // private route
-                navigate(from, {replace:true})
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -85,13 +104,13 @@ const Login = () => {
                                     <label className="label">
                                         <LoadCanvasTemplate></LoadCanvasTemplate>
                                     </label>
-                                    <input onBlur={handleCaptcha} type="text" ref={captchaRef} name="captcha" placeholder="captcha" className="input input-bordered"/>
+                                    <input onBlur={handleCaptcha} type="text" ref={captchaRef} name="captcha" placeholder="captcha" className="input input-bordered" />
                                 </div>
                                 {/* Captcha */}
 
 
                                 <div className="form-control mt-6">
-                                    {/* TODO:  disabled={disable} for captcha active*/} 
+                                    {/* TODO:  disabled={disable} for captcha active*/}
                                     <input type="submit" disabled={disable} value="Login" className="btn btn-primary" />
                                 </div>
                             </form>

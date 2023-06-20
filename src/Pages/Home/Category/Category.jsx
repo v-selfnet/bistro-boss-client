@@ -18,6 +18,8 @@ const Category = () => {
                 subHeading={"from 11:00 to 22:00"}
                 heading={"Order Online"}
             ></SectionTitle>
+
+
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
@@ -48,7 +50,9 @@ const Category = () => {
                     <img className="rounded-2xl" src={slide5} alt="" />
                     <h3 className= "text-center uppercase -mt-16">Salad</h3>
                 </SwiperSlide>
+                
             </Swiper>
+
         </section>
     );
 };

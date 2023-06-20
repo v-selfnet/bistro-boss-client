@@ -3,13 +3,43 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import logo from '/profile.png'
+import { FaTrash, FaUserShield } from "react-icons/fa";
 
 const AllUsers = () => {
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        console.log(users)
+        // console.log(users)
         const res = await fetch('http://localhost:5000/users')
         return res.json();
     })
+
+    
+    const handleMakeAdmin = user => {
+        console.log(user)
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'PATCH'
+        })
+        .then(res => res.json())
+        .then(data => {
+            refetch();
+            console.log(data)
+        })
+    }
+
+    const handleDelete = user => {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data)
+            if(data.deletedCount > 0){
+                refetch();
+                alert('User Delete Seccess !!!')
+            }
+
+        })
+    }
+
     return (
         <div>
             <Helmet>
@@ -33,7 +63,7 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.slice(9,13).map((user, index) => <tr key={user._id}>
+                            users.map((user, index) => <tr key={user._id}>
                                 <th>{index +1}</th>
                                 <td>
                                     <div className="avatar">
@@ -45,9 +75,12 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.pass}</td>
-                                <td>Roll</td>
+                                <td>{user.role === 'admin' ? 'admin' : 
+                                <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost text-orange-600 text-3xl"><FaUserShield /></button>
+                                }
+                                </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs">details</button>
+                                <button onClick={() => handleDelete(user)} className="btn btn-ghost text-red-600 text-3xl"><FaTrash /></button>
                                 </td>
                             </tr>)
 

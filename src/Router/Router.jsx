@@ -6,7 +6,7 @@ import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
-import Secret from "../Secret/Secret";
+import Secret from "../Secret/Secret";  
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";

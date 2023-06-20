@@ -3,6 +3,7 @@ import { FaHome, FaShoppingCart, FaWallet, FaCalendarAlt, FaShoppingBag, FaEnvel
 import { FiMenu } from 'react-icons/fi';
 import useCart from "../Hooks/useCart";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../Hooks/useAdmin";
 
 
 
@@ -10,7 +11,9 @@ const Dashboard = () => {
     const [cart] = useCart();
 
     // TODO: manage admin
-    const isAdmin = true;
+    // const isAdmin = true;
+
+    const [isAdmin] = useAdmin()
 
     return (
 

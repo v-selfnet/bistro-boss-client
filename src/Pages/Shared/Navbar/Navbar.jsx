@@ -7,9 +7,9 @@ import logo from '/logo.png'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user)
+    // console.log(user)
     const [cart] = useCart();
-    console.log(cart)
+    // console.log(cart)
 
     const handleLogout = () => {
         logOut()

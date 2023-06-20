@@ -22,10 +22,13 @@ const Testimonials = () => {
                 subHeading={"What our client say"}
                 heading={"Testimolials"}
             ></SectionTitle>
+
+
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                 {
                     reviews.map(review => <SwiperSlide key={review._id}>
                         <div className="flex flex-col items-center px-10  mx-10 text-center space-y-6">
+                            
                             <p>Ratings: {review.rating}</p>
                             <Rating rewind={true} style={{ maxWidth: 180 }} value={review.rating} readOnly/>
                             <p>{review.details}</p>

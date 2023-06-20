@@ -11,7 +11,7 @@ const Register = () => {
     // form created by reacy-hook-form
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
