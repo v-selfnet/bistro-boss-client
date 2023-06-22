@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import logo from '/profile.png'
 import { FaTrash, FaUserShield } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const AllUsers = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -46,13 +47,15 @@ const AllUsers = () => {
 
     return (
         <div>
-            <Helmet>
-                <title>Bistro Boss | All Users</title>
-            </Helmet>
-            <h3 className="text-2xl font-semibold">All Users: {users.length}</h3>
+            <Helmet><title>Bistro Boss | All Users</title></Helmet>
+            <SectionTitle
+                subHeading={`~ Total Users: ${users.length} ~`}
+                heading={'User Management - Control Panel'}
+            ></SectionTitle>
+            {/* <h3 className="text-2xl font-semibold">All Users: {users.length}</h3> */}
 
-            <div className="overflow-x-auto w-full">
-                <table className="table">
+            <div className="w-full">
+                <table className="table mx-auto">
                     {/* head */}
                     <thead>
                         <tr>

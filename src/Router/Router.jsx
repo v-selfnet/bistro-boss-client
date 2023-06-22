@@ -15,6 +15,7 @@ import Calender from "../Pages/Dashboard/Calender/Calender";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AddItem from "../Pages/Dashboard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 
 export const router = createBrowserRouter([
     {
@@ -76,8 +77,12 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><AddItem></AddItem></AdminRoute>
             },
             {
+                path: 'manageitems',
+                element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+            },
+            {
                 path: 'allusers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             }
         ]
     }

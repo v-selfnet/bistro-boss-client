@@ -31,7 +31,7 @@ const Dashboard = () => {
                 <title>Bistro Boss | Dashboard</title>
             </Helmet>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center ">
+            <div className="drawer-content">
                 <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden absolute top-0 left-0">Open drawer</label>
 
                 {/* Page content here */}
@@ -57,7 +57,7 @@ const Dashboard = () => {
                         isAdmin ? <>
                             <li><Link to='#'><FaHome />Admin Home</Link></li>
                             <li><Link to='additem'><FaUtensils />Add Items</Link></li>
-                            <li><Link to='#'><FaSlidersH />Manage Items</Link></li>
+                            <li><Link to='manageitems'><FaSlidersH />Manage Items</Link></li>
                             <li><Link to='#'><FaBook />Manage Bookings</Link></li>
                             <li><Link to='allusers'><FaUsers />All Users</Link></li>
 
