@@ -3,10 +3,11 @@ import useCart from "../../../Hooks/useCart";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
     const [cart, refetch] = useCart();
-    console.log(cart)
+    // console.log(cart)
     const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
 
     const handleDelete = item => {
@@ -24,47 +25,47 @@ const MyCart = () => {
                 fetch(`http://localhost:5000/carts/${item._id}`, {
                     method: 'DELETE'
                 })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    if(data.deletedCount > 0){
-                        refetch() // call function fron hook useCart.jsx
-                        Swal.fire(
-                            'Deleted!',
-                            'Your item has been deleted.',
-                            'success'
-                          )
-                    }
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.deletedCount > 0) {
+                            refetch() // call function fron hook useCart.jsx
+                            Swal.fire(
+                                'Deleted!',
+                                'Your item has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
             }
         })
     }
     return (
-        <div>
-            <Helmet>
-                <title>Bistro Boss | My Cart</title>
-            </Helmet>
+        <div className="w-full mx-10">
+            <Helmet><title>Bistro Boss | My Cart</title></Helmet>
             <SectionTitle
                 subHeading={"~ My Cart~ "}
                 heading={"Want to add more Item"}
             ></SectionTitle>
-            <div className="flex justify-between gap-10 items-center uppercase mb-6">
+            <div className="flex justify-evenly my-4">
                 <h3 className="text-2xl font-semibold">Total Orders: {cart.length}</h3>
-                <h3 className="text-2xl font-semibold">Total Price: $ {totalPrice}</h3>
-                <button className="btn btn-active btn-sm text-orange-700 bg-orange-300 border-0">Pay Now</button>
+                <h3 className="text-2xl font-semibold">Total Price: $ {totalPrice.toFixed(2)}</h3>
+                <Link to='/dashboard/payment'>
+                    <button className="btn btn-active btn-sm text-orange-700 bg-orange-300 border-0">Pay Now</button>
+                </Link>
             </div>
 
             {/* table */}
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div>
+                <table className="table w-3/4 mx-auto">
                     {/* head */}
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Action</th>
+                    <thead >
+                        <tr >
+                            <th className="bg-orange-400">#</th>
+                            <th className="bg-orange-400">Image</th>
+                            <th className="bg-orange-400">Name</th>
+                            <th className="bg-orange-400">Price</th>
+                            <th className="bg-orange-400">Action</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -7,15 +7,9 @@ import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
 import './Dashboard.css'
 
-
-
 const Dashboard = () => {
     const { logOut } = useAuth();
     const [cart] = useCart();
-
-    // TODO: manage admin
-    // const isAdmin = true;
-
     const [isAdmin] = useAdmin()
 
     const handleLogout = () => {
@@ -55,7 +49,7 @@ const Dashboard = () => {
 
                     {
                         isAdmin ? <>
-                            <li><Link to='#'><FaHome />Admin Home</Link></li>
+                            <li><Link to='adminhome'><FaHome />Admin Home</Link></li>
                             <li><Link to='additem'><FaUtensils />Add Items</Link></li>
                             <li><Link to='manageitems'><FaSlidersH />Manage Items</Link></li>
                             <li><Link to='#'><FaBook />Manage Bookings</Link></li>
@@ -64,7 +58,7 @@ const Dashboard = () => {
                         </> : <>
                             <li><Link to='userhome'><FaHome />User Home</Link></li>
                             <li><Link to='calender'><FaCalendarAlt />Reservation</Link></li>
-                            <li><Link to='payment'><FaWallet />Payment History</Link></li>
+                            <li><Link to='paymenthistory'><FaWallet />Payment History</Link></li>
                             <li>
                                 <Link to='mycart'><FaShoppingCart />My Cart
                                     <div className="badge badge-secondary">
